@@ -27,9 +27,17 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+  //hourly vars
   private ArrayList<String> hours = new ArrayList<>();
   private ArrayList<String> iconList = new ArrayList<>();
   private ArrayList<String> degList = new ArrayList<>();
+
+  //daily vars
+  private ArrayList<String> dateList = new ArrayList<>();
+  private ArrayList<String> iconDailyList = new ArrayList<>();
+  private ArrayList<String> highestList = new ArrayList<>();
+  private ArrayList<String> lowestList = new ArrayList<>();
+
   private RequestQueue queue;
   private double longitude =0.0;
   private double latitude =0.0;
@@ -59,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
           curWeather =  gson.fromJson( fetchedData.getJSONObject("current").toString(), CurrentWeather.class);
           dailyWeathers = gson.fromJson(fetchedData.getJSONArray("daily").toString(), DailyWeather[].class);
           hourlyWeathers = gson.fromJson(fetchedData.getJSONArray("hourly").toString(), HourlyWeather[].class);
-          Log.d("WEATHER",(Long.toString( dailyWeathers[0].getDt())));
-          Log.d("DateTime",parseUnixToDate(hourlyWeathers[1].getDt()).toString());
           hours.clear();
           iconList.clear();
           degList.clear();
@@ -72,15 +78,27 @@ public class MainActivity extends AppCompatActivity {
               Date tempDate = parseUnixToDate(hourlyWeathers[i].getDt());
               String tempHour = getHour(tempDate);
               this.hours.add(tempHour);
-              Log.d("Date",tempHour);
             }
             this.iconList.add(String.format("https://openweathermap.org/img/wn/%s@2x.png", (hourlyWeathers[i].getWeather().get(0).getIcon())) );
             this.degList.add(String.format("%d\u00B0", Math.round(hourlyWeathers[i].getTemp() - 273.15)));
           }
+          dateList.clear();
+          iconDailyList.clear();
+          highestList.clear();
+          lowestList.clear();
+          for(int j=0; j<7; j++){
+            Date date = parseUnixToDate(dailyWeathers[j+1].getDt());
+            String weekday = getDate(date);
+            this.dateList.add(weekday);
+            Log.d("Day: ", dateList.get(j));
+
+            this.iconDailyList.add(String.format("https://openweathermap.org/img/wn/%s@2x.png", dailyWeathers[j+1].getWeather().get(0).getIcon()));
+            this.highestList.add(String.valueOf(Math.round(dailyWeathers[j+1].getTempMax() - 273.15)));
+            this.lowestList.add(String.valueOf(Math.round(dailyWeathers[j+1].getTempMin() - 273.15)));
+          }
           initRecyclerView();
         }
         catch (JSONException e){
-          Log.d("Error",e.toString());
         }
       },
       error -> {
@@ -92,10 +110,16 @@ public class MainActivity extends AppCompatActivity {
     queue.add(stringRequest);
   }
   private void initRecyclerView(){
+    // Hourly
     RecyclerView recyclerView = findViewById(R.id.recyclerView);
     recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
     RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, hours, iconList, degList);
     recyclerView.setAdapter(adapter);
+    // Daily
+    RecyclerView recyclerViewDaily = findViewById(R.id.recyclerViewDaily);
+    recyclerViewDaily.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    RecyclerViewDailyAdapter adapter2 = new RecyclerViewDailyAdapter(this, dateList, iconDailyList, highestList, lowestList);
+    recyclerViewDaily.setAdapter(adapter2);
   }
   private Date parseUnixToDate(long dateUnix){
     return Date.from(Instant.ofEpochSecond(dateUnix));

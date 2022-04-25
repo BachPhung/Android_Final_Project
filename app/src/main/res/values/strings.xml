@@ -3,4 +3,8 @@
     <string name="now">Now</string>
     <string name="_4_u00b0">4°</string>
     <string name="weather_icon">weather-icon</string>
+    <string name="monday">Monday</string>
+    <string name="_2">-2</string>
+    <string name="_6">6</string>
+    <string name="weather_icon_hourly" />
 </resources>

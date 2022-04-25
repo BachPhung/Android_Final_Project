@@ -4,9 +4,37 @@ import java.util.List;
 
 public class DailyWeather {
   private long dt;
-  private static class temp{
+  private Temp temp;
+
+  public Double getTempMax() {
+    return temp.getMax();
+  }
+  public Double getTempMin() {
+    return temp.getMin();
+  }
+  public void setTemp(Temp temp) {
+    this.temp = temp;
+  }
+
+  private class Temp{
     private double min;
     private double max;
+
+    public double getMin() {
+      return min;
+    }
+
+    public void setMin(double min) {
+      this.min = min;
+    }
+
+    public double getMax() {
+      return max;
+    }
+
+    public void setMax(double max) {
+      this.max = max;
+    }
   };
   private int pressure;
   private int humidity;
