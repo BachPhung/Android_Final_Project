@@ -13,12 +13,9 @@ public class LoadingActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_loading);
     Handler handler = new Handler();
-    handler.postDelayed(new Runnable() {
-      @Override
-      public void run() {
-        startActivity(new Intent(LoadingActivity.this, MainActivity.class));
-        finish();
-      }
+    handler.postDelayed(() -> {
+      startActivity(new Intent(LoadingActivity.this, MainActivity.class));
+      finish();
     },3000);
   }
 }

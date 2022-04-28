@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     setContentView(R.layout.activity_main);
     queue = Volley.newRequestQueue(this);
     startGPS();
-
   }
 
   private void initialData() {
