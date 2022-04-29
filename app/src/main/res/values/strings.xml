@@ -7,4 +7,6 @@
     <string name="_2">-2</string>
     <string name="_6">6</string>
     <string name="weather_icon_hourly" />
+    <string name="weather_forcast">WEATHER FORCAST</string>
+    <string name="developed_by_bach_phung">Developed by Bach Phung</string>
 </resources>
