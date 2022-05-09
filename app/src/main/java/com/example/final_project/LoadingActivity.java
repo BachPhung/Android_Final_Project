@@ -24,7 +24,7 @@ import com.google.gson.JsonParser;
 
 public class LoadingActivity extends AppCompatActivity implements LocationListener {
 
-  //variables
+  // variables
   private RequestQueue queue;
   private double longitude = 0.0;
   private double latitude = 0.0;
@@ -33,7 +33,7 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
   StringRequest weatherRequest, cityNameRequest;
   LocationManager locationManager;
 
-  //Methods
+  // Methods
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -47,13 +47,17 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
     super.onPause();
     locationManager.removeUpdates(this); // Unregister location listener
   }
+
+  //Todo: Return (String) : URL of weather API
   private String urlWeather() {
     return String.format("https://api.openweathermap.org/data/2.5/onecall?lat=%.4f&lon=%.4f&exclude=minutely&appid=d8288cede8b8b1149b236932c004dc6a", this.latitude, this.longitude);
   }
+  //Todo: Return (String) : URL name of city API
   private String urlCityName() {
     return String.format("https://api.openweathermap.org/geo/1.0/reverse?lat=%.4f&lon=%.4f&limit=1&appid=d8288cede8b8b1149b236932c004dc6a", this.latitude, this.longitude) ;
   }
 
+  //Todo: Make REST Request (synchronously)
   private void initialDataLoading(){
     this.weatherRequest = new StringRequest(Request.Method.GET, urlWeather(), response -> {
       try{
@@ -71,8 +75,9 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
     }, error -> {
       Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
     });
-
   }
+
+
   public void startGPS() {
     //Todo: Start listening to user's location through Location Manager
     //Todo: - location permission specified in android manifest file

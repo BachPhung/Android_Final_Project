@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
   CurrentWeather curWeather;
   DailyWeather[] dailyWeathers;
   HourlyWeather[] hourlyWeathers;
+  LocationManager locationManager;
 
 
   private String urlWeather() {
@@ -77,9 +78,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     } catch (JSONException e) {
       e.printStackTrace();
     }
-
   }
 
+  @Override
+  protected void onPause(){
+    super.onPause();
+    locationManager.removeUpdates(this);
+  }
+
+  @Override
+  protected void onResume(){
+    super.onResume();
+    startGPS();
+  }
 
   private void initialData() {
     //  1. Make a request to weather map api
@@ -191,7 +202,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     //Todo: Start listening to user's location through Location Manager
     //Todo: - location permission specified in android manifest file
     //Todo: - ask user's permission run-time before accessing GPS
-    LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    Log.d("START_GPS", "Start GPS called");
     try {
       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
         // TODO: Check if the user has granted permission for GPS
