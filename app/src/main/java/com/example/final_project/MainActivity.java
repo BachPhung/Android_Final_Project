@@ -2,7 +2,9 @@ package com.example.final_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -170,7 +172,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     TextView curWeatherDesc = findViewById(R.id.weatherDesc);
     TextView curWeatherDeg = findViewById(R.id.weatherDeg);
     TextView curWeatherHi_Li = findViewById(R.id.high_low);
+    ConstraintLayout layouts = findViewById(R.id.background);
 
+    layouts.setBackground(ContextCompat.getDrawable(this, R.drawable.thunderstorm));
     curWeatherDeg.setText(String.format("%d\u00B0", Math.round(curWeather.getTemp() - 273.15)));
     curWeatherDesc.setText(curWeather.getWeather().get(0).getMain());
     curWeatherHi_Li.setText(String.format("H:%d\u00B0 L:%d\u00B0",Math.round(dailyWeathers[0].getTempMax() - 273.15), Math.round(dailyWeathers[0].getTempMin() - 273.15) ));

@@ -8,10 +8,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="55dp"
-        android:layout_height="118dp"
+        android:layout_height="125dp"
         android:foregroundGravity="center"
-        app:cardCornerRadius="4dp"
-        app:cardMaxElevation="2dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,11 +27,11 @@
                 android:id="@+id/hour"
                 android:layout_width="42dp"
                 android:layout_height="18dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/now"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.555"
+                app:layout_constraintHorizontal_bias="0.461"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +43,7 @@
                 android:gravity="center"
                 android:text="@string/_4_u00b0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.466"
+                app:layout_constraintHorizontal_bias="0.48"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,6 +55,7 @@
                 android:contentDescription="@string/weather_icon_hourly"
                 android:foregroundGravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.466"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/hour">
 
