@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -12,7 +13,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,7 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonParser;
 
 public class LoadingActivity extends AppCompatActivity implements LocationListener {
 
@@ -28,7 +27,6 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
   private RequestQueue queue;
   private double longitude = 0.0;
   private double latitude = 0.0;
-  private boolean firstRender = true;
   String weatherResponse="", cityNameResponse="";
   StringRequest weatherRequest, cityNameRequest;
   LocationManager locationManager;
@@ -49,10 +47,12 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
   }
 
   //Todo: Return (String) : URL of weather API
+  @SuppressLint("DefaultLocale")
   private String urlWeather() {
     return String.format("https://api.openweathermap.org/data/2.5/onecall?lat=%.4f&lon=%.4f&exclude=minutely&appid=d8288cede8b8b1149b236932c004dc6a", this.latitude, this.longitude);
   }
   //Todo: Return (String) : URL name of city API
+  @SuppressLint("DefaultLocale")
   private String urlCityName() {
     return String.format("https://api.openweathermap.org/geo/1.0/reverse?lat=%.4f&lon=%.4f&limit=1&appid=d8288cede8b8b1149b236932c004dc6a", this.latitude, this.longitude) ;
   }
@@ -63,18 +63,14 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
       try{
         this.weatherResponse = response;
       }
-      catch (Exception e){}
-    }, error -> {
-      Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-    });
+      catch (Exception ignored){}
+    }, error -> Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show());
     this.cityNameRequest = new StringRequest(Request.Method.GET, urlCityName(),response -> {
       try{
         this.cityNameResponse = response;
       }
-      catch (Exception e){}
-    }, error -> {
-      Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
-    });
+      catch (Exception ignored){}
+    }, error -> Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show());
   }
 
 
@@ -109,7 +105,7 @@ public class LoadingActivity extends AppCompatActivity implements LocationListen
     queue.add(cityNameRequest);
   }
 
-  private class PrefetchData extends AsyncTask<Void, Void, Void> {
+  public class PrefetchData extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected synchronized Void doInBackground(Void... arg0) {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Bài cuối kì</string>
+    <string name="now">Bây giờ</string>
+    <string name="monday">Thứ hai</string>
+    <string name="weather_forecast">DỰ BÁO THỜI TIẾT</string>
+    <string name="developed_by_bach_phung">Phát triển bởi Bách Phung</string>
+</resources>

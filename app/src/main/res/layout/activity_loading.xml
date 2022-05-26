@@ -15,7 +15,7 @@
         android:layout_marginTop="76dp"
         android:fontFamily="sans-serif-condensed-light"
         android:gravity="center"
-        android:text="@string/weather_forcast"
+        android:text="@string/weather_forecast"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"

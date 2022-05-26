@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Viimeinen tehtävä</string>
+    <string name="now">Nyt</string>
+    <string name="monday">Maanantai</string>
+    <string name="weather_forecast">Sääennuste</string>
+    <string name="developed_by_bach_phung">Kehittäjä Bach Phung</string>
+</resources>

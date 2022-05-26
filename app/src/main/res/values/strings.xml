@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Final_Project</string>
     <string name="now">Now</string>
-    <string name="_4_u00b0">4°</string>
-    <string name="weather_icon">weather-icon</string>
+    <string name="_4_u00b0" translatable="false">4°</string>
+    <string name="weather_icon" translatable="false">weather-icon</string>
     <string name="monday">Monday</string>
-    <string name="_2">-2</string>
-    <string name="_6">6</string>
-    <string name="weather_icon_hourly" />
-    <string name="weather_forcast">WEATHER FORCAST</string>
+    <string name="_2" translatable="false">-2</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="weather_icon_hourly" translatable="false" />
+    <string name="weather_forecast">WEATHER FORECAST</string>
     <string name="developed_by_bach_phung">Developed by Bach Phung</string>
 </resources>
